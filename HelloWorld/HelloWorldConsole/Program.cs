@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace HelloWorldConsole
+﻿namespace HelloWorldConsole
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var generator = new TextGenerator();
-            Console.WriteLine(generator.GenerateHelloWorld());
+            var mainProgram = new MainProgram();
+            mainProgram.Run();
         }
     }
 }
