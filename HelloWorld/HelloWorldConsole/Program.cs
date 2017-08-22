@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            var mainProgram = new MainProgram();
+            var textGenerator = new TextGenerator();
+            var console = new SystemWrapper.ConsoleWrap();
+
+            var mainProgram = new MainProgram(console, textGenerator);
             mainProgram.Run();
         }
     }
