@@ -11,13 +11,12 @@ namespace HelloWorldConsole
             var builder = new ContainerBuilder();
             builder.RegisterType<TextGenerator>().As<ITextGenerator>();
             builder.RegisterType<SystemWrapper.ConsoleWrap>().As<SystemInterface.IConsole>();
+            builder.RegisterType<MainProgram>().As<IMainProgram>();
             Container = builder.Build();
 
             using(var scope = Container.BeginLifetimeScope())
             {
-                var textGenerator = scope.Resolve<ITextGenerator>();
-                var console = scope.Resolve<SystemInterface.IConsole>();
-                var mainProgram = new MainProgram(console, textGenerator);
+                var mainProgram = scope.Resolve<IMainProgram>();
                 mainProgram.Run();
             }
         }

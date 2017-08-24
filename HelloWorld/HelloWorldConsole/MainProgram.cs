@@ -3,7 +3,12 @@ using SystemInterface;
 
 namespace HelloWorldConsole
 {
-    public class MainProgram {
+    public interface IMainProgram
+    {
+        void Run();
+    }
+
+    public class MainProgram :IMainProgram {
 
         private readonly IConsole _console;
         private readonly ITextGenerator _textGenerator;
