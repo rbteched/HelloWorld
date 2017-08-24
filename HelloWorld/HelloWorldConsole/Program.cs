@@ -1,14 +1,25 @@
-﻿namespace HelloWorldConsole
+﻿using Autofac;
+
+namespace HelloWorldConsole
 {
     class Program
     {
+        private static IContainer Container { get; set; }
+
         static void Main(string[] args)
         {
-            var textGenerator = new TextGenerator();
-            var console = new SystemWrapper.ConsoleWrap();
+            var builder = new ContainerBuilder();
+            builder.RegisterType<TextGenerator>().As<ITextGenerator>();
+            builder.RegisterType<SystemWrapper.ConsoleWrap>().As<SystemInterface.IConsole>();
+            Container = builder.Build();
 
-            var mainProgram = new MainProgram(console, textGenerator);
-            mainProgram.Run();
+            using(var scope = Container.BeginLifetimeScope())
+            {
+                var textGenerator = scope.Resolve<ITextGenerator>();
+                var console = scope.Resolve<SystemInterface.IConsole>();
+                var mainProgram = new MainProgram(console, textGenerator);
+                mainProgram.Run();
+            }
         }
     }
 }
