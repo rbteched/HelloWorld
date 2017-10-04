@@ -1,13 +1,18 @@
-﻿namespace HelloWorldConsole
+﻿using StructureMap;
+using SystemInterface;
+using SystemWrapper;
+
+namespace HelloWorldConsole
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var textGenerator = new TextGenerator();
-            var console = new SystemWrapper.ConsoleWrap();
-
-            var mainProgram = new MainProgram(console, textGenerator);
+            var registry = new Registry();
+            registry.IncludeRegistry(new HelloRegistry());
+            var container = new Container(registry);
+            
+            var mainProgram = container.GetInstance<MainProgram>();
             mainProgram.Run();
         }
     }

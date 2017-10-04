@@ -1,5 +1,4 @@
-﻿using System;
-using SystemInterface;
+﻿using SystemInterface;
 
 namespace HelloWorldConsole
 {
